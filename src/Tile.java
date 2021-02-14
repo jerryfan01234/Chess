@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 
 public class Tile {
-	boolean empty = true;
 	Piece piece;
 	Position position;
 	ArrayList<Object> history = new ArrayList<Object>();
@@ -11,23 +10,25 @@ public class Tile {
 	}
 	
 	public void addPiece(Piece piece) {
-		this.empty = false;
 		this.piece = piece;
 	}
 	
 	public Piece removePiece() {
-		this.empty = true;
 		Piece tempPiece = this.piece;
 		this.piece = null;
 		return tempPiece;
 	}
 	
 	public void updateHistory() {
-		if (this.empty) {
+		if (this.isEmpty()) {
 			this.history.add(null);
 		} else {
 			this.history.add(new TileHistory(this.piece.name, this.piece.player));
 		}
+	}
+	
+	public boolean isEmpty() {
+		return this.piece == null;
 	}
 }
 
